@@ -1,0 +1,8 @@
+# Files from build
+**/*.o
+**/*.s
+src/.depend
+
+# Built binary
+src/scan*
+src/-lstdc++.res

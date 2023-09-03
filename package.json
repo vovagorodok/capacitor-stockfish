@@ -1,6 +1,6 @@
 {
   "name": "capacitor-scan",
-  "version": "3.0.2",
+  "version": "1.0.0",
   "description": "Ionic Capacitor Scan interface",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
