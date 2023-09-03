@@ -18,7 +18,8 @@ xcshareddata
 # macOS files
 .DS_Store
 
-
+# VSCode
+.vscode/
 
 # Based on Android gitignore template: https://github.com/github/gitignore/blob/master/Android.gitignore
 
