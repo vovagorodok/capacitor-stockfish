@@ -11,6 +11,7 @@
 #include "bb_comp.hpp"
 #include "common.hpp"
 #include "libmy.hpp"
+#include "thread.hpp"
 #include "util.hpp"
 
 namespace bb {
@@ -47,7 +48,7 @@ void Index_::load(const std::string & file_name, Index size) {
    std::ifstream file(file_name, std::ios::binary);
 
    if (!file) {
-      std::cerr << "unable to open file \"" << file_name << "\"" << std::endl;
+      sync_cout << "error: unable to open file \"" << file_name << "\"" << sync_endl;
       std::exit(EXIT_FAILURE);
    }
 
@@ -77,7 +78,7 @@ void Index_::load(const std::string & file_name, Index size) {
    }
 
    if (pos != m_size) {
-      std::cerr << "unmatched uncompressed size: " << file_name << ": " << m_size << " -> " << pos << std::endl;
+      sync_cout << "error: unmatched uncompressed size: " << file_name << ": " << m_size << " -> " << pos << sync_endl;
       std::exit(EXIT_FAILURE);
    }
 

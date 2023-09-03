@@ -15,8 +15,6 @@
 #include "threadbuf.h"
 #include "filestream.hpp"
 
-using namespace Scan;
-
 #define LOGD(TAG,...) __android_log_print(ANDROID_LOG_DEBUG  , TAG,__VA_ARGS__)
 
 extern "C" {
@@ -94,7 +92,7 @@ JNIEXPORT void JNICALL Java_org_lidraughts_mobileapp_scan_Scan_jniInit(JNIEnv *e
   std::string ttSize = std::to_string(floor(log2(hashSize * 1024 * 1024 / 16)));
   var::set("tt-size", ttSize);
 
-  // no datapath, files are loaded from the asset manager
+  // files are loaded from asset root
   var::set("datapath", "");
 
   // set variant
@@ -108,11 +106,6 @@ JNIEXPORT void JNICALL Java_org_lidraughts_mobileapp_scan_Scan_jniInit(JNIEnv *e
   jglobalAssetManager = env->NewGlobalRef(jassetManager);
   AAssetManager* mgr = AAssetManager_fromJava(env, jglobalAssetManager);
   set_asset_manager(mgr);
-
-  // TODO: how/when do we set threads?
-  // Threads.set(size_t(Options["Threads"]));
-
-  bit::init(); // depends on the variant
 
   // start input loop on a new thread
   listen_input();

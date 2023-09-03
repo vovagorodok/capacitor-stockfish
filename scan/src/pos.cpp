@@ -14,6 +14,7 @@
 #include "move.hpp"
 #include "pos.hpp"
 #include "score.hpp"
+#include "thread.hpp"
 #include "util.hpp"
 #include "var.hpp"
 
@@ -351,38 +352,38 @@ void disp(const Pos & pos) {
 
          if (square_is_light(fl, rk)) {
 
-            std::cout << "  ";
+            sync_cout << "  ";
 
          } else {
 
             Square sq = square_make(fl, rk);
 
             switch (piece_side(pos, sq)) {
-               case White_Man :  std::cout << "O "; break;
-               case Black_Man :  std::cout << "* "; break;
-               case White_King : std::cout << "@ "; break;
-               case Black_King : std::cout << "# "; break;
-               case Empty :      std::cout << "- "; break;
+               case White_Man :  sync_cout << "O "; break;
+               case Black_Man :  sync_cout << "* "; break;
+               case White_King : sync_cout << "@ "; break;
+               case Black_King : sync_cout << "# "; break;
+               case Empty :      sync_cout << "- "; break;
             }
          }
       }
 
-      std::cout << "  ";
+      sync_cout << "  ";
 
       for (int fl = 0; fl < File_Size; fl++) {
 
          if (square_is_light(fl, rk)) {
-            std::cout << "  ";
+            sync_cout << "  ";
          } else {
             Square sq = square_make(fl, rk);
-            std::cout << std::right << std::setfill('0') << std::setw(2) << square_to_std(sq);
+            sync_cout << std::right << std::setfill('0') << std::setw(2) << square_to_std(sq);
          }
       }
 
-      std::cout << '\n';
+      sync_cout << '\n';
    }
 
-   std::cout << '\n';
+   sync_cout << '\n';
 
    // turn/result
 
@@ -390,14 +391,14 @@ void disp(const Pos & pos) {
    Side def = side_opp(atk);
 
    if (is_end(pos)) {
-      std::cout << side_to_string(var::Variant == var::Losing ? atk : def) << " wins #";
+      sync_cout << side_to_string(var::Variant == var::Losing ? atk : def) << " wins #";
    } else {
-      std::cout << side_to_string(atk) << " to play";
-      if (bb::pos_is_load(pos)) std::cout << ", bitbase " << bb::value_to_string(bb::probe(pos));
+      sync_cout << side_to_string(atk) << " to play";
+      if (bb::pos_is_load(pos)) sync_cout << ", bitbase " << bb::value_to_string(bb::probe(pos));
    }
 
-   std::cout << '\n';
-   std::cout << std::endl;
+   sync_cout << '\n';
+   sync_cout << sync_endl;
 }
 
 void wolf_from_hub(const std::string & s, Pos & pos) {

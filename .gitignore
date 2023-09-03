@@ -2,9 +2,6 @@
 # In order to prevent that, we remove the initial "."
 # And the CLI then renames it
 
-# stockfish neural network parameters file 
-*.nnue
-
 # node files
 dist/
 node_modules/

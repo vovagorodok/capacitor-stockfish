@@ -142,7 +142,7 @@ void eval_init() {
    std::unique_ptr<std::istream> file = get_stream_binary(file_name);
 
    if (!file) {
-      std::cerr << "unable to open file \"" << file_name << "\"" << std::endl;
+      sync_cout << "error: unable to open file \"" << file_name << "\"" << sync_endl;
       std::exit(EXIT_FAILURE);
    }
 

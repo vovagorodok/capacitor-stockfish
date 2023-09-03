@@ -110,8 +110,8 @@ namespace book {
 
       if (Disp_Moves) {
          // pos::disp(pos);
-         std::cout << "k = " << k << std::endl;
-         std::cout << std::endl;
+         sync_cout << "k = " << k << sync_endl;
+         sync_cout << sync_endl;
          list::disp(list, pos, k);
       }
 
@@ -204,7 +204,7 @@ namespace book {
       std::unique_ptr<std::istream> file = get_stream(file_name);
 
       if (!file) {
-         std::cerr << "unable to open file \"" << file_name << "\"" << std::endl;
+         sync_cout << "error: unable to open file \"" << file_name << "\"" << sync_endl;
          std::exit(EXIT_FAILURE);
       }
 
@@ -223,7 +223,7 @@ namespace book {
       file >> node;
 
       if (file.eof()) {
-         std::cerr << "load(): EOF" << std::endl;
+         sync_cout << "error: book load() EOF" << sync_endl;
          std::exit(EXIT_FAILURE);
       }
 
@@ -232,7 +232,7 @@ namespace book {
          file >> entry->score;
 
          if (file.eof()) {
-            std::cerr << "load(): EOF" << std::endl;
+            sync_cout << "error: book load() EOF" << sync_endl;
             std::exit(EXIT_FAILURE);
          }
 

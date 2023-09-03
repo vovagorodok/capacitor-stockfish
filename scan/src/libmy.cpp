@@ -15,6 +15,7 @@
 #include <string>
 
 #include "libmy.hpp"
+#include "thread.hpp"
 
 namespace ml {
 
@@ -73,7 +74,7 @@ int get_byte(std::istream & stream) {
    char c;
 
    if (!stream.get(c)) {
-      std::cerr << "error while reading file" << std::endl;
+      sync_cout << "error: unable to read from file" << sync_endl;
       std::exit(EXIT_FAILURE);
    }
 

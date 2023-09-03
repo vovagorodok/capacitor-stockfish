@@ -10,6 +10,7 @@
 
 #include "common.hpp"
 #include "libmy.hpp"
+#include "thread.hpp"
 #include "var.hpp"
 
 namespace var {
@@ -58,7 +59,7 @@ void load(const std::string & file_name) {
    std::ifstream file(file_name);
 
    if (!file) {
-      std::cerr << "unable to open file \"" << file_name << "\"" << std::endl;
+      sync_cout << "error: unable to open file \"" << file_name << "\"" << sync_endl;
       std::exit(EXIT_FAILURE);
    }
 
@@ -74,7 +75,7 @@ void load(const std::string & file_name) {
          std::getline(file, comment);
 
          if (file.eof()) {
-            std::cerr << "invalid INI file" << std::endl;
+            sync_cout << "error: invalid INI file" << sync_endl;
             std::exit(EXIT_FAILURE);
          }
 
@@ -85,14 +86,14 @@ void load(const std::string & file_name) {
       std::string sep;
       file >> sep;
       if (file.eof() || sep != "=") {
-         std::cerr << "invalid INI file" << std::endl;
+         sync_cout << "error: invalid INI file" << sync_endl;
          std::exit(EXIT_FAILURE);
       }
 
       std::string value;
       file >> value;
       if (file.eof()) {
-         std::cerr << "invalid INI file" << std::endl;
+         sync_cout << "error: invalid INI file" << sync_endl;
          std::exit(EXIT_FAILURE);
       }
 
@@ -118,7 +119,7 @@ void update() {
    } else if (variant == "losing") {
       Variant = Losing;
    } else {
-      std::cerr << "error: variant = \"" << variant << "\"" << std::endl;
+      sync_cout << "error: unknown variant \"" << variant << "\"" << sync_endl;
       std::exit(EXIT_FAILURE);
    }
 
@@ -130,7 +131,7 @@ void update() {
    } else if (eval == "pattern") {
       Eval = Pattern;
    } else {
-      std::cerr << "error: eval = \"" << eval << "\"" << std::endl;
+      sync_cout << "error: unknown eval \"" << eval << "\"" << sync_endl;
       std::exit(EXIT_FAILURE);
    }
    
@@ -148,7 +149,7 @@ void update() {
 std::string get(const std::string & name) {
 
    if (Var.find(name) == Var.end()) {
-      std::cerr << "unknown variable: \"" << name << "\"" << std::endl;
+      sync_cout << "error: unknown variable \"" << name << "\"" << sync_endl;
       std::exit(EXIT_FAILURE);
    }
 
@@ -168,7 +169,7 @@ static bool get_bool(const std::string & name) {
    } else if (value == "false") {
       return false;
    } else {
-      std::cerr << "not a boolean: variable " << name << " = \"" << value << "\"" << std::endl;
+      sync_cout << "error: not a boolean variable " << name << " = \"" << value << "\"" << sync_endl;
       std::exit(EXIT_FAILURE);
       return false;
    }
