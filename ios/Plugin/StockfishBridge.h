@@ -1,16 +1,16 @@
 #import <Foundation/Foundation.h>
 #import <Capacitor/Capacitor.h>
-#import "StockfishSendOutput.h"
+#import "ScanSendOutput.h"
 
-@class Stockfish;
+@class Scan;
 
-@interface StockfishBridge : NSObject
+@interface ScanBridge : NSObject
 
-@property(strong, nonatomic) Stockfish *plugin;
+@property(strong, nonatomic) Scan *plugin;
 
 + (NSString*) getCPUType;
 
-- (instancetype)initWithPlugin:(Stockfish *)plugin;
+- (instancetype)initWithPlugin:(Scan *)plugin;
 
 - (void) start;
 - (void) cmd: (NSString*)command;

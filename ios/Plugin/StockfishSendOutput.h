@@ -1,6 +1,6 @@
-#ifndef StockfishSendOutput_h
-#define StockfishSendOutput_h
+#ifndef ScanSendOutput_h
+#define ScanSendOutput_h
 
-void StockfishSendOutput (void *stockfish, const char *output);
+void ScanSendOutput (void *scan, const char *output);
 
-#endif /* StockfishSendOutput_h */
+#endif /* ScanSendOutput_h */

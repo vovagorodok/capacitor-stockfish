@@ -1,12 +1,12 @@
-#ifndef Stockfish_hpp
-#define Stockfish_hpp
+#ifndef Scan_hpp
+#define Scan_hpp
 
 #include <string>
 
-namespace CapacitorStockfish {
-void init(void *stockfish);
+namespace CapacitorScan {
+void init(void *scan);
 void cmd(std::string cmd);
 void exit();
 }
 
-#endif /* Stockfish_hpp */
+#endif /* Scan_hpp */

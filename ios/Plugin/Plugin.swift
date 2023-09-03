@@ -1,15 +1,15 @@
 import Foundation
 import Capacitor
 
-@objc(Stockfish)
-public class Stockfish: CAPPlugin {
+@objc(Scan)
+public class Scan: CAPPlugin {
     
-    private var stockfish: StockfishBridge?
+    private var scan: ScanBridge?
     private var isInit = false
     
     private let template = "{\"output\": \"%@\"}"
     @objc public func sendOutput(_ output: String) {
-        bridge?.triggerWindowJSEvent(eventName: "stockfish", data: String(format: template, output))
+        bridge?.triggerWindowJSEvent(eventName: "scan", data: String(format: template, output))
     }
 
     @objc override public func load() {
@@ -18,7 +18,7 @@ public class Stockfish: CAPPlugin {
         NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: OperationQueue.main) { [weak self] (_) in
             if (self!.isInit) {
                 onPauseWorkItem = DispatchWorkItem {
-                    self?.stockfish?.cmd("stop")
+                    self?.scan?.cmd("stop")
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 60 * 3, execute: onPauseWorkItem!)
             }
@@ -32,8 +32,8 @@ public class Stockfish: CAPPlugin {
 
         NotificationCenter.default.addObserver(forName: UIApplication.willTerminateNotification, object: nil, queue: OperationQueue.main) { [weak self] (_) in
             if (self!.isInit) {
-                self?.stockfish?.cmd("stop")
-                self?.stockfish?.exit()
+                self?.scan?.cmd("stop")
+                self?.scan?.exit()
                 self?.isInit = false
             }
         }
@@ -45,7 +45,7 @@ public class Stockfish: CAPPlugin {
     
     @objc func getCPUArch(_ call: CAPPluginCall) {
         call.resolve([
-            "value": StockfishBridge.getCPUType() ?? "unknown"
+            "value": ScanBridge.getCPUType() ?? "unknown"
         ])
     }
 
@@ -59,8 +59,8 @@ public class Stockfish: CAPPlugin {
 
     @objc func start(_ call: CAPPluginCall) {
         if (!isInit) {
-            stockfish = StockfishBridge(plugin: self)
-            stockfish?.start()
+            scan = ScanBridge(plugin: self)
+            scan?.start()
             isInit = true
         }
         call.resolve()
@@ -72,7 +72,7 @@ public class Stockfish: CAPPlugin {
                 call.reject("Must provide a cmd")
                 return
             }
-            stockfish?.cmd(cmd)
+            scan?.cmd(cmd)
             call.resolve()
         } else {
             call.reject("You must call start before anything else")
@@ -81,8 +81,8 @@ public class Stockfish: CAPPlugin {
     
     @objc func exit(_ call: CAPPluginCall) {
         if (isInit) {
-            stockfish?.cmd("quit")
-            stockfish?.exit()
+            scan?.cmd("quit")
+            scan?.exit()
             isInit = false
         }
         call.resolve()

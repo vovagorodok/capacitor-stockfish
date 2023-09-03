@@ -1,12 +1,12 @@
-# Capacitor Stockfish plugin
+# Capacitor Scan plugin
 
-[Stockfish](https://stockfishchess.org/) chess engine interface for Ionic
-Capacitor.
+[Scan 3.1](https://github.com/rhalbersma/scan) draughts engine by Fabien Letouzey,
+interface for Ionic Capacitor.
 
 ## Example usage
 
-- https://github.com/veloce/lichobile/blob/master/src/stockfish.ts
-- https://github.com/veloce/lichobile/blob/master/src/ui/analyse/ceval/StockfishClient.ts
+- https://github.com/roepstoep/lidrobile/blob/master/src/scan.ts
+- https://github.com/roepstoep/lidrobile/blob/master/src/ui/analyse/ceval/ScanClient.ts
 
 ## API
 
@@ -68,7 +68,7 @@ cmd(options: { cmd: string; }) => Promise<void>
 ```
 
 Sends a command to the engine. You can listen to the output using the
-"stockfish" window event.
+"scan" window event.
 
 | Param         | Type                          |
 | ------------- | ----------------------------- |

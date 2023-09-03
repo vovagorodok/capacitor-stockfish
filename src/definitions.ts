@@ -1,4 +1,4 @@
-export interface StockfishPlugin {
+export interface ScanPlugin {
   /**
    * Returns the maximum number of MB that can be used by the engine.
    */
@@ -14,7 +14,7 @@ export interface StockfishPlugin {
   start(): Promise<void>
   /**
    * Sends a command to the engine. You can listen to the output using the
-   * "stockfish" window event.
+   * "scan" window event.
    */
   cmd(options: { cmd: string }): Promise<void>
   /**

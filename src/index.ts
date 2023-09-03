@@ -1,8 +1,8 @@
 import { registerPlugin } from '@capacitor/core';
 
-import type { StockfishPlugin } from './definitions';
+import type { ScanPlugin } from './definitions';
 
-const Stockfish = registerPlugin<StockfishPlugin>('Stockfish');
+const Scan = registerPlugin<ScanPlugin>('Scan');
 
 export * from './definitions';
-export { Stockfish };
+export { Scan };

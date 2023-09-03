@@ -1,4 +1,4 @@
-package org.lichess.mobileapp.stockfish;
+package org.lidraughts.mobileapp.scan;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -17,8 +17,8 @@ import com.getcapacitor.PluginMethod;
 import com.getcapacitor.annotation.CapacitorPlugin;
 
 
-@CapacitorPlugin(name = "Stockfish")
-public final class Stockfish extends Plugin {
+@CapacitorPlugin(name = "Scan")
+public final class Scan extends Plugin {
 
   private PluginCall outputCall;
   private boolean isInit = false;
@@ -30,7 +30,7 @@ public final class Stockfish extends Plugin {
   private static boolean supportedArch = true;
   static {
     try {
-      System.loadLibrary("stockfish");
+      System.loadLibrary("scan");
     } catch (java.lang.UnsatisfiedLinkError e) {
       supportedArch = false;
     }
@@ -43,7 +43,7 @@ public final class Stockfish extends Plugin {
   public void onMessage(byte[] bytes) {
     JSObject obj = new JSObject();
     obj.put("output", new String(bytes));
-    bridge.triggerWindowJSEvent("stockfish", obj.toString());
+    bridge.triggerWindowJSEvent("scan", obj.toString());
   }
   // end JNI
 

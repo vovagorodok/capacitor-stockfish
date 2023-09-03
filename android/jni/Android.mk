@@ -1,8 +1,8 @@
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := stockfish
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../stockfish/src/ $(LOCAL_PATH)/../../lib/
+LOCAL_MODULE := scan
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../scan/src/ $(LOCAL_PATH)/../../lib/
 LOCAL_SRC_FILES := \
 	stockfish-jni.cpp \
 	../../stockfish/src/thread.cpp \

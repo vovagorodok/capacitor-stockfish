@@ -3,13 +3,13 @@
 #include <sys/sysctl.h>
 #include <mach/machine.h>
 #import <Capacitor/CAPPlugin.h>
-#import <CapacitorStockfish/CapacitorStockfish-Swift.h>
-#import "StockfishBridge.h"
-#import "Stockfish.hpp"
+#import <CapacitorScan/CapacitorScan-Swift.h>
+#import "ScanBridge.h"
+#import "Scan.hpp"
 
-@implementation StockfishBridge
+@implementation ScanBridge
 
-- (instancetype)initWithPlugin:(Stockfish *)plugin {
+- (instancetype)initWithPlugin:(Scan *)plugin {
     self = [super init];
     if (self) {
         _plugin = plugin;
@@ -18,15 +18,15 @@
 }
 
 - (void) start {
-    CapacitorStockfish::init((__bridge void*)self);
+    CapacitorScan::init((__bridge void*)self);
 }
 
 - (void) cmd: (NSString*)command {
-    CapacitorStockfish::cmd(std::string([command UTF8String]));
+    CapacitorScan::cmd(std::string([command UTF8String]));
 }
 
 - (void) exit {
-    CapacitorStockfish::exit();
+    CapacitorScan::exit();
 }
 
 - (void) sendOutput: (NSString*)output {
@@ -74,7 +74,7 @@
 }
 
 
-void StockfishSendOutput (void *bridge, const char *output)
+void ScanSendOutput (void *bridge, const char *output)
 {
   [(__bridge id) bridge sendOutput:[NSString stringWithUTF8String:output]];
 }
