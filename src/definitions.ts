@@ -11,7 +11,7 @@ export interface ScanPlugin {
   /**
    * Initialize the engine. You must call this method before sending commands.
    */
-  start(): Promise<void>
+  start(options: { variant: string }): Promise<void>
   /**
    * Sends a command to the engine. You can listen to the output using the
    * "scan" window event.
