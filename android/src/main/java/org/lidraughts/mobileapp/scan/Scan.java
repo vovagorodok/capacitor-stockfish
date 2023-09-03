@@ -2,6 +2,7 @@ package org.lidraughts.mobileapp.scan;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.os.Build;
 
 import java.util.concurrent.Executors;
@@ -37,7 +38,7 @@ public final class Scan extends Plugin {
   }
 
   // JNI
-  public native void jniInit();
+  public native void jniInit(String variant, AssetManager assetManager);
   public native void jniExit();
   public native void jniCmd(String cmd);
   public void onMessage(byte[] bytes) {
@@ -77,7 +78,13 @@ public final class Scan extends Plugin {
   @PluginMethod
   public void start(PluginCall call) {
     if (supportedArch && !isInit) {
-      jniInit();
+      String variant = call.getString("variant");
+      if (variant == null) {
+        call.error("Must provide a variant");
+        return;
+      }
+      Context context = getContext();
+      jniInit(variant, context.getAssets());
       isInit = true;
     }
     call.success();

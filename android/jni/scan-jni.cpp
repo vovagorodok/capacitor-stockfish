@@ -20,7 +20,7 @@ using namespace Scan;
 #define LOGD(TAG,...) __android_log_print(ANDROID_LOG_DEBUG  , TAG,__VA_ARGS__)
 
 extern "C" {
-  JNIEXPORT void JNICALL Java_org_lidraughts_mobileapp_scan_Scan_jniInit(JNIEnv *env, jobject obj, jstring jvariant);
+  JNIEXPORT void JNICALL Java_org_lidraughts_mobileapp_scan_Scan_jniInit(JNIEnv *env, jobject obj, jstring jvariant, jobject jassetManager);
   JNIEXPORT void JNICALL Java_org_lidraughts_mobileapp_scan_Scan_jniExit(JNIEnv *env, jobject obj);
   JNIEXPORT void JNICALL Java_org_lidraughts_mobileapp_scan_Scan_jniCmd(JNIEnv *env, jobject obj, jstring jcmd);
 };
@@ -72,7 +72,7 @@ auto readstdout = []() {
 
 std::thread reader;
 
-JNIEXPORT void JNICALL Java_org_lidraughts_mobileapp_scan_Scan_jniInit(JNIEnv *env, jobject obj, jstring jvariant) {
+JNIEXPORT void JNICALL Java_org_lidraughts_mobileapp_scan_Scan_jniInit(JNIEnv *env, jobject obj, jstring jvariant, jobject jassetManager) {
   jobj = env->NewGlobalRef(obj);
   env->GetJavaVM(&jvm);
   jclass classScan = env->GetObjectClass(obj);
