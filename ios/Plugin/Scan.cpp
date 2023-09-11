@@ -4,7 +4,7 @@
 #include "../../scan/src/bit.hpp"
 #include "../../scan/src/main.hpp"
 #include "../../scan/src/hash.hpp"
-#include "../../scan/src/pos.hp"
+#include "../../scan/src/pos.hpp"
 #include "../../scan/src/thread.hpp"
 #include "../../scan/src/var.hpp"
 #include "../../lib/threadbuf.h"
@@ -14,7 +14,6 @@
 
 namespace CapacitorScan
 {
-  using namespace Scan;
   static std::string CMD_EXIT = "scan:exit";
 
   auto readstdout = [](void *bridge) {
