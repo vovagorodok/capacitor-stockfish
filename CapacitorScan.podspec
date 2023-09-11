@@ -13,16 +13,16 @@ Pod::Spec.new do |s|
   s.source = { :git => package['repository']['url'], :tag => s.version.to_s }
   s.source_files = 'ios/Plugin/**/*.{swift,h,m,c,cc,mm,cpp}', 'scan/src/**/*.{h,cpp}', 'lib/*.h'
   s.public_header_files = 'ios/Plugin/**/*.h'
-  s.exclude_files = 'scan/src/main.cpp', 'scan/src/Makefile'
+  s.exclude_files = 'scan/src/Makefile'
   s.ios.deployment_target  = '12.0'
   s.dependency 'Capacitor'
   s.swift_version = '5.1'
   s.compiler_flags = '-fmodules -fcxx-modules'
   s.xcconfig = {
     'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES',
-    'CLANG_CXX_LANGUAGE_STANDARD' => 'gnu++17',
+    'CLANG_CXX_LANGUAGE_STANDARD' => 'gnu++14',
     'CLANG_CXX_LIBRARY' => 'libc++',
-    'OTHER_CPLUSPLUSFLAGS' => '-fno-exceptions -std=c++17 -DUSE_PTHREADS -DNDEBUG -O3 -DIS_64BIT -DUSE_POPCNT -flto=thin',
-    'OTHER_LDFLAGS' => '-fno-exceptions -std=c++17 -DUSE_PTHREADS -DNDEBUG -O3 -DIS_64BIT -DUSE_POPCNT -flto=thin'
+    'OTHER_CPLUSPLUSFLAGS' => '-fexceptions -std=c++14 -DHAVE_PTHREAD=1 -O3',
+    'OTHER_LDFLAGS' => '-fexceptions -std=c++14 -DHAVE_PTHREAD=1 -O3'
   }
 end

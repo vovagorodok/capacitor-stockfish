@@ -46,32 +46,46 @@ namespace CapacitorScan
 
   std::thread reader;
 
-  void init(void *bridge) {
+  void init(void *bridge, std::string variant, std::string resourcePath) {
     reader = std::thread(readstdout, bridge);
 
-    UCI::init(Options);
-    Tune::init();
-    PSQT::init();
-    Bitboards::init();
-    Position::init();
-    Bitbases::init();
-    Endgames::init();
-    Threads.set(size_t(Options["Threads"]));
-    Search::clear(); // After threads are up
-#ifndef NNUE_EMBEDDING_OFF
-    Eval::NNUE::init();
-#endif
+    bit::init();
+    hash::init();
+    pos::init();
+    var::init();
+
+    bb::index_init();
+    bb::comp_init();
+
+    ml::rand_init(); // after hash keys
+
+    // use fixed hash size
+    const int hashSize = 32;
+    std::string ttSize = std::to_string(floor(log2(hashSize * 1024 * 1024 / 16)));
+    var::set("tt-size", ttSize);
+
+    // store resources directory as datapath
+    var::set("datapath", resourcePath);
+
+    // set variant 
+    var::set("variant", variant);
+    var::update();
+
+    bit::init(); // depends on the variant
+
+    // start input loop on a new thread
+    listen_input();
   }
 
   void cmd(std::string cmd) {
-    UCI::command(cmd);
+    hub_command(cmd);
   }
 
   void exit() {
-    UCI::command("quit");
+    hub_command("quit");
     sync_cout << CMD_EXIT << sync_endl;
     reader.join();
-    Threads.set(0);
+
   }
 }
 
