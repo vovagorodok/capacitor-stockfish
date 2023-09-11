@@ -14,7 +14,7 @@ interface for Ionic Capacitor.
 
 * [`getMaxMemory()`](#getmaxmemory)
 * [`getCPUArch()`](#getcpuarch)
-* [`start()`](#start)
+* [`start(...)`](#start)
 * [`cmd(...)`](#cmd)
 * [`exit()`](#exit)
 
@@ -50,13 +50,17 @@ Possible values are: armeabi, armeabi-v7a, arm64-v8a, x86, x86_64, mips, mips64.
 --------------------
 
 
-### start()
+### start(...)
 
 ```typescript
-start() => Promise<void>
+start(options: { variant: string; }) => Promise<void>
 ```
 
 Initialize the engine. You must call this method before sending commands.
+
+| Param         | Type                              |
+| ------------- | --------------------------------- |
+| **`options`** | <code>{ variant: string; }</code> |
 
 --------------------
 
