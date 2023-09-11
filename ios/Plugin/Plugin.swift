@@ -59,8 +59,12 @@ public class Scan: CAPPlugin {
 
     @objc func start(_ call: CAPPluginCall) {
         if (!isInit) {
+            guard let variant = call.options["variant"] as? String else {
+                call.reject("Must provide a variant")
+                return
+            }
             scan = ScanBridge(plugin: self)
-            scan?.start()
+            scan?.start(variant)
             isInit = true
         }
         call.resolve()

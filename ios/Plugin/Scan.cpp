@@ -1,22 +1,21 @@
 #include <iostream>
-#include "../../stockfish/src/bitboard.h"
-#include "../../stockfish/src/endgame.h"
-#include "../../stockfish/src/position.h"
-#include "../../stockfish/src/psqt.h"
-#include "../../stockfish/src/search.h"
-#include "../../stockfish/src/thread.h"
-#include "../../stockfish/src/tt.h"
-#include "../../stockfish/src/uci.h"
-#include "../../stockfish/src/syzygy/tbprobe.h"
+#include "../../scan/src/bb_comp.hpp"
+#include "../../scan/src/bb_index.hpp"
+#include "../../scan/src/bit.hpp"
+#include "../../scan/src/main.hpp"
+#include "../../scan/src/hash.hpp"
+#include "../../scan/src/pos.hp"
+#include "../../scan/src/thread.hpp"
+#include "../../scan/src/var.hpp"
 #include "../../lib/threadbuf.h"
-#include "Stockfish.hpp"
-#include "StockfishSendOutput.h"
+#include "Scan.hpp"
+#include "ScanSendOutput.h"
 
 
-namespace CapacitorStockfish
+namespace CapacitorScan
 {
-  using namespace Stockfish;
-  static std::string CMD_EXIT = "stockfish:exit";
+  using namespace Scan;
+  static std::string CMD_EXIT = "scan:exit";
 
   auto readstdout = [](void *bridge) {
     std::streambuf* out = std::cout.rdbuf();
@@ -33,7 +32,7 @@ namespace CapacitorStockfish
       std::getline(lichin, line);
       if (line != CMD_EXIT) {
         const char* coutput = line.c_str();
-        StockfishSendOutput(bridge, coutput);
+        ScanSendOutput(bridge, coutput);
       } else {
         o = CMD_EXIT;
       }

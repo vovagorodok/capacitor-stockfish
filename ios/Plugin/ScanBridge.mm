@@ -17,8 +17,9 @@
     return self;
 }
 
-- (void) start {
-    CapacitorScan::init((__bridge void*)self);
+- (void) start: (NSString*)variant {
+    NSString* resourcePath = [[NSBundle mainBundle] resourcePath];
+    CapacitorScan::init((__bridge void*)self, std::string([variant UTF8String]), std::string([resourcePath UTF8String]));
 }
 
 - (void) cmd: (NSString*)command {

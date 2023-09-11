@@ -12,7 +12,7 @@
 
 - (instancetype)initWithPlugin:(Scan *)plugin;
 
-- (void) start;
+- (void) start: (NSString*)variant;
 - (void) cmd: (NSString*)command;
 - (void) exit;
 
