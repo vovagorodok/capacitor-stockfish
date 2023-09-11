@@ -9,7 +9,8 @@ public class Scan: CAPPlugin {
     
     private let template = "{\"output\": \"%@\"}"
     @objc public func sendOutput(_ output: String) {
-        bridge?.triggerWindowJSEvent(eventName: "scan", data: String(format: template, output))
+        let escaped = output.replacingOccurrences(of: "\"", with: "\\\"")
+        bridge?.triggerWindowJSEvent(eventName: "scan", data: String(format: template, escaped))
     }
 
     @objc override public func load() {
@@ -85,7 +86,7 @@ public class Scan: CAPPlugin {
     
     @objc func exit(_ call: CAPPluginCall) {
         if (isInit) {
-            scan?.cmd("quit")
+            scan?.cmd("stop")
             scan?.exit()
             isInit = false
         }
