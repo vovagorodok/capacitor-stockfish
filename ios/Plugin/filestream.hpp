@@ -11,5 +11,7 @@
 std::unique_ptr<std::istream> get_stream(const std::string & filename);
 std::unique_ptr<std::istream> get_stream_binary(const std::string & filename);
 
+std::int64_t get_file_size(const std::string & filename);
+
 #endif // !defined FILESTREAM_HPP
 

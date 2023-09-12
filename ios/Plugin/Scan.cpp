@@ -64,7 +64,7 @@ namespace CapacitorScan
     var::set("tt-size", ttSize);
 
     // store resources directory as datapath
-    var::set("datapath", resourcePath);
+    var::set("datapath", resourcePath + "/scan");
 
     // set variant 
     var::set("variant", variant);

@@ -16,3 +16,7 @@ std::unique_ptr<std::istream> get_stream(const std::string & file_name) {
 std::unique_ptr<std::istream> get_stream_binary(const std::string & file_name) {
     return std::make_unique<std::ifstream>(std::ifstream(var::data_file(file_name), std::ios::binary));
 }
+
+std::int64_t get_file_size(const std::string & file_name) {
+    return -1;
+}

@@ -10,6 +10,7 @@
 
 #include "bb_comp.hpp"
 #include "common.hpp"
+#include "filestream.hpp"
 #include "libmy.hpp"
 #include "thread.hpp"
 #include "util.hpp"
@@ -45,7 +46,7 @@ void comp_init() {
 
 void Index_::load(const std::string & file_name, Index size) {
 
-   std::ifstream file(file_name, std::ios::binary);
+   std::unique_ptr<std::istream> file = get_stream_binary(file_name);
 
    if (!file) {
       sync_cout << "error: unable to open file \"" << file_name << "\"" << sync_endl;
@@ -53,7 +54,11 @@ void Index_::load(const std::string & file_name, Index size) {
    }
 
    m_size = size;
-   load_file(m_table, file);
+
+   int64 file_size = get_file_size(file_name);
+   if (file_size == -1) file_size = ml::stream_size(*file);
+   m_table.resize(file_size);
+   file->read((char *) m_table.data(), file_size);
 
    // create index table for on-line decompression
 

@@ -131,7 +131,7 @@ void Base::load(ID id) {
    m_id = id;
    m_size = index_size(id);
 
-   std::string file_name = var::data_file(std::string("bb") + var::variant_name() + "/" + std::to_string(id_size(id)) + "/" + id_name(id));
+   std::string file_name = std::string("bb") + var::variant_name() + "/" + std::to_string(id_size(id)) + "/" + id_name(id);
    m_index.load(file_name, m_size);
 }
 

@@ -11,12 +11,6 @@
 
 // functions
 
-void load_file(std::vector<uint8> & table, std::istream & file) {
-   int64 size = ml::stream_size(file);
-   table.resize(size);
-   file.read((char *) table.data(), size);
-}
-
 Scanner_Number::Scanner_Number(const std::string & s) : m_string{s} {}
 
 std::string Scanner_Number::get_token() {

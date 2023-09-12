@@ -8,6 +8,7 @@
 #include <streambuf>
 
 #include "filestream.hpp"
+#include "var.hpp"
 
 // types
 
@@ -38,7 +39,7 @@ void set_asset_manager(AAssetManager* manager) {
 }
 
 std::unique_ptr<std::istream> get_stream(const std::string & file_name) {
-    AAsset* asset = AAssetManager_open(asset_manager, file_name.c_str(), 0);
+    AAsset* asset = AAssetManager_open(asset_manager, var::data_file(file_name).c_str(), 0);
     if (!asset) return NULL;
 
     long size = AAsset_getLength(asset);
@@ -51,4 +52,14 @@ std::unique_ptr<std::istream> get_stream(const std::string & file_name) {
 
 std::unique_ptr<std::istream> get_stream_binary(const std::string & file_name) {
     return get_stream(file_name);
+}
+
+std::int64_t get_file_size(const std::string & file_name) {
+    AAsset* asset = AAssetManager_open(asset_manager, var::data_file(file_name).c_str(), 0);
+    if (!asset) return -1;
+
+    long size = AAsset_getLength(asset);
+    AAsset_close(asset);
+
+    return size;
 }

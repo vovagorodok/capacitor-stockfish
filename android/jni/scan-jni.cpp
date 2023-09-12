@@ -92,8 +92,8 @@ JNIEXPORT void JNICALL Java_org_lidraughts_mobileapp_scan_Scan_jniInit(JNIEnv *e
   std::string ttSize = std::to_string(floor(log2(hashSize * 1024 * 1024 / 16)));
   var::set("tt-size", ttSize);
 
-  // files are loaded from asset root
-  var::set("datapath", "");
+  // files are loaded from folder scan at asset root
+  var::set("datapath", "scan");
 
   // set variant
   const char* variant = env->GetStringUTFChars(jvariant, (jboolean *)0);

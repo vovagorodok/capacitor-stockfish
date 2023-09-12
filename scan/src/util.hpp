@@ -83,8 +83,6 @@ private:
 
 // functions
 
-void load_file (std::vector<uint8> & table, std::istream & file);
-
 bool string_is_nat (const std::string & s);
 
 #endif // !defined UTIL_HPP
