@@ -28,6 +28,7 @@ LOCAL_SRC_FILES := \
 	../../stockfish/src/uci.cpp \
 	../../stockfish/src/endgame.cpp
 LOCAL_LDLIBS := -llog -landroid
+LOCAL_LDFLAGS += -Wl,-z,max-page-size=16384
 LOCAL_ARM_NEON := true
 
 include $(BUILD_SHARED_LIBRARY)
